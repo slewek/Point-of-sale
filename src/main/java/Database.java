@@ -11,14 +11,7 @@ public class Database {
     /**initialize database */
     public Database(){
         try {
-
-            String driver = "com.mysql.jdbc.Driver";
-            String url = "jdbc:mysql://localhost:3306/shop?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
-            String username = "root";
-            String password = "pass";
-
-            Class.forName("com.mysql.jdbc.Driver");
-            connection = DriverManager.getConnection(url, username, password);
+            getDBConnection();
 
             String sql =
                     "CREATE TABLE SHOP " +
@@ -38,6 +31,16 @@ public class Database {
             System.out.println(ex.toString());
 
         }
+    }
+
+
+    public void getDBConnection() throws ClassNotFoundException, SQLException {
+        Class.forName("com.mysql.jdbc.Driver");
+        String url = "jdbc:mysql://localhost:3306/shop?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
+        String username = "root";
+        String password = "pass";
+
+        connection = DriverManager.getConnection(url, username, password);
     }
 
     /**Droping the table after exiting */
